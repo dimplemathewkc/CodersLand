@@ -3,13 +3,7 @@
 Online code editor
 strapped with [Create React App](https://github.com/facebook/create-react-app).
 
-
-
-
 https://user-images.githubusercontent.com/36413448/123548597-0c2e9880-d783-11eb-947e-95ed82459bd5.mov
-
-
-
 
 ## Available Scripts
 
