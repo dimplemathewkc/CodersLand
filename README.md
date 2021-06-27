@@ -5,6 +5,8 @@ strapped with [Create React App](https://github.com/facebook/create-react-app).
 
 https://user-images.githubusercontent.com/36413448/123548971-a8a56a80-d784-11eb-935d-4eb53a27b351.mov
 
+## Introduction to the product
+This is a code editor supporting multiple programming languages
 ## Available Scripts
 
 In the project directory, you can run:
