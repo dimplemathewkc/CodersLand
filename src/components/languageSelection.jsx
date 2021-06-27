@@ -6,14 +6,15 @@ class LangSelection extends Component {
 <form>
             <div className="form-group row m-1">
                 
-                <div className="col-sm-2">
+                <div className="col-sm-3">
                     <label className="p-1">Language:</label>
                 </div>
-                <div className="col-sm-4">
+                <div className="col-sm-8">
                     <select className="form-select" onChange={this.props.languageChange}>
-                    {this.props.lang.map(lang =>
-                        <option key={lang['id']} value={lang['lang']} >{lang['lang']}</option>
-                    )}
+                        <option key={this.props.current_lang}>{this.props.current_lang}</option>
+                        {this.props.lang.map(lang => 
+                              this.props.current_lang === lang['lang']? "":<option key={lang['id']} value={lang['lang']}>{lang['lang']}</option>
+                        )}
                     </select>
                 </div>
             

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import '../App.css';
 import LangSelection from './languageSelection';
 import Theme from './theme';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 import Modal from "react-modal";
 import axios from 'axios'
 import AceEditor from "react-ace";
@@ -20,16 +22,17 @@ class Editor extends Component {
                     {'id':4, 'lang':'ruby'},
                     {'id':5, 'lang':'yaml'}
                 ],
+          
         theme_list : ['monokai','kuroir','github',
                 'tomorrow','twilight','xcode','textmate',
                 'solarized_dark','solarized_light','terminal'],
+
         language: 'python',
         code: '',
         result:'',
         trace:'',
         isOpen: false
      }
-
      handleLanguageChange = (e) => {
          console.log("Language Change happened",e.target.value)
          const language = e.target.value
@@ -99,9 +102,7 @@ class Editor extends Component {
         return ( 
             <div className="containerFluid">
                 <div className="row float-right">
-                    <button type="button"  onClick={this.toggleModal} style={{transition: "transform .2s" }} className="btn btn-default m-2 border-0" aria-label="Left Align">
-                        <span><i className="fa fa-cog" style={{fontSize: "36px"}}></i></span>
-                    </button>
+                    
                     <Modal
                             isOpen={this.state.isOpen}
                             onRequestClose={this.toggleModal}
@@ -111,13 +112,13 @@ class Editor extends Component {
                         >
                         <div className="container ">
                             <div className="container">
-                                
+                                {console.log(this.theme_lists)}
                                 <button className="btn btn-secondary float-right" onClick={this.toggleModal}><i className="fa fa-close"></i></button>
                                 <br></br>
                                 <div className="row">
                                     <div className="col-sm-12">
-                                        <Theme onThemeChange={this.handleTheme} themes={this.state.theme_list}/>
-                                        <LangSelection languageChange={this.handleLanguageChange} lang={this.state.lang}/>
+                                        <Theme onThemeChange={this.handleTheme} themes={this.state.theme_list} current_theme={this.state.theme}/>
+                                        <LangSelection languageChange={this.handleLanguageChange} lang={this.state.lang} current_lang={this.state.language}/>
                                     </div>
                                 </div>
                             </div>
@@ -130,6 +131,20 @@ class Editor extends Component {
                 <br></br>
             <div className="row m-2"></div>
             <div className="card shadow-lg p-3 mb-5 border-0 bg-white">   
+                <div class="card-header border-0">
+                    <button type="button"  onClick={this.toggleModal} style={{transition: "transform .2s" }} className="btn btn-default border-0 float-right" aria-label="Left Align">
+                        <span><i className="fa fa-cog" style={{fontSize: "20px"}}></i></span>
+                    </button>
+                    <button type="button"  onClick={this.toggleModal} style={{transition: "transform .2s" }} className="btn btn-default border-0 float-right" aria-label="Left Align">
+                        <span><i className="fa fa-expand" style={{fontSize: "20px"}}></i></span>
+                    </button>
+                    <button type="button"  onClick={this.toggleModal} style={{transition: "transform .2s" }} className="btn btn-default border-0 float-right">
+                        <span><i className="fa fa-download" style={{fontSize: "20px"}}></i></span>
+                    </button>
+                    <button type="button"  onClick={this.toggleModal} style={{transition: "transform .2s" }} className="btn btn-default border-0 float-right" aria-label="Left Align">
+                        <span><i className="fa fa-info" style={{fontSize: "20px"}}></i></span>
+                    </button>
+                </div>
                 <div className="row m-2">
                     <div className="col-md-6 card">
                         <AceEditor
@@ -154,26 +169,39 @@ class Editor extends Component {
 
                     </div>
                    
-                    <div className="card col-md-6">
-                        <div className="card-body">
-                            <div>
-                                {this.state.status}
-                            </div>
-                            <div>
-                                {this.state.result}
-                            </div>
-                                {this.state.trace}    
-                        </div>
-                        <div class="card-footer"><small><a href="" style={{cursor: "pointer", color: "#3C415C", textDecoration: "none"}}>console</a></small></div>
-                    </div>    
+                    <div className="card col-md-6" style={{background: '#DCDCDC', fontFamily:"Courier", fontSize:12}}>
+                            <Tabs  style={{
+                                color: "#3f3f5a",
+                                background: '#DCDCDC',
+                            }}>
+                                <TabList>
+                                <Tab>Console</Tab>
+                                <Tab>Testcases</Tab>
+                                </TabList>
+
+                                <TabPanel style={{fontSize:14}}>
+                                    <div>{this.state.status}</div>
+                                    <div>{this.state.result}</div>
+                                    <div>{this.state.trace} </div>
+                                </TabPanel>
+                                <TabPanel>
+                                    <h2>Any content 2</h2>
+                                </TabPanel>
+                            </Tabs>
+                                
+                    </div>   
+                    </div> 
                     <div className="row">
                 <div className="col-sm-12">
-                    <button className="btn btn-success m-3 float-right" onClick={this.handleCode}>Run <span><i className="fa fa-caret-right" aria-hidden="true"></i></span> </button>
+                    <button className="btn btn-success m-1 float-right" onClick={this.handleCode}>Run <span><i className="fa fa-caret-right" aria-hidden="true"></i></span> </button>
+                    <button className="btn btn-secondary m-1 float-right" onClick="">Save <span><i className="fa fa-save" aria-hidden="true"></i></span> </button>
+                    <button className="btn btn-secondary m-1 float-right" onClick="">Format <span><i className="fa fa-align-justify" aria-hidden="true"></i></span> </button>
+                    
                 </div>
             </div>
                 </div>
             </div>
-           </div> 
+           
   </div>
         );
     }
