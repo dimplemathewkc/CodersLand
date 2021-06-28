@@ -165,9 +165,9 @@ class Editor extends Component {
                             editorProps={{ $blockScrolling: true }}
                             wrapEnabled= {true}
                             highlightActiveLine={true}
-                            autoScrollEditorIntoView ={true}  />
+                            autoScrollEditorIntoView ={true}  />       
 
-                    </div>
+                    </div> 
                    
                     <div className="card col-md-6" style={{background: '#DCDCDC', fontFamily:"Courier", fontSize:12}}>
                             <Tabs  style={{
