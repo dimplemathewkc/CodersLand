@@ -169,14 +169,14 @@ class Editor extends Component {
 
                     </div> 
                    
-                    <div className="card col-md-6" style={{background: '#DCDCDC', fontFamily:"Courier", fontSize:12}}>
+                    <div className="card col-md-5" style={{background: '#DCDCDC', fontFamily:"Courier", fontSize:12}}>
                             <Tabs  style={{
                                 color: "#3f3f5a",
                                 background: '#DCDCDC',
                             }}>
                                 <TabList>
                                 <Tab>Console</Tab>
-                                <Tab>Testcases</Tab>
+                                <Tab disabled>Testcases</Tab>
                                 </TabList>
 
                                 <TabPanel style={{fontSize:14}}>
