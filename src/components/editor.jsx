@@ -58,7 +58,7 @@ class Editor extends Component {
                  result: "Please add code to the terminal and then click on run."
              })
          }
-         const url = "https://coders-land-backend.herokuapp.com/compile-python/"
+         const url = "http://127.0.0.1:8000/compile-python/"
          const code = this.state.code
          setTimeout(()=> {
             axios.post(url,{code}).then(res => {
@@ -143,6 +143,7 @@ class Editor extends Component {
                         </div>
         
                     </Modal>
+                    
                 </div>
             <div className="container">
                 <br></br>
@@ -155,12 +156,12 @@ class Editor extends Component {
                     {/* <button type="button"  onClick={this.expandCard} style={{transition: "transform .2s" }} className="btn btn-default border-0 float-right" aria-label="Left Align">
                         <span><i className="fa fa-expand" style={{fontSize: "20px"}}></i></span>
                     </button> */}
-                    <button type="button"  onClick={this.toggleModal} style={{transition: "transform .2s" }} className="btn btn-default border-0 float-right">
+                    <button type="button"  onClick="" style={{transition: "transform .2s" }} className="btn btn-default border-0 float-right">
                         <span><i className="fa fa-download" style={{fontSize: "20px"}}></i></span>
                     </button>
-                    <button type="button"  onClick={this.toggleModal} style={{transition: "transform .2s" }} className="btn btn-default border-0 float-right" aria-label="Left Align">
+                    {/* <button type="button"  onClick={this.toggleModal} style={{transition: "transform .2s" }} className="btn btn-default border-0 float-right" aria-label="Left Align">
                         <span><i className="fa fa-info" style={{fontSize: "20px"}}></i></span>
-                    </button>
+                    </button> */}
                 </div>
                 <div className="row m-2 p2">
                     <div className={this.state.cardSize1}>
@@ -214,8 +215,8 @@ class Editor extends Component {
                     <div className="row">
                 <div className="col-sm-12">
                     <button className="btn btn-success m-1 float-right" onClick={this.handleCode}>Run <span><i className="fa fa-caret-right" aria-hidden="true"></i></span> </button>
-                    <button className="btn btn-secondary m-1 float-right" onClick="">Save <span><i className="fa fa-save" aria-hidden="true"></i></span> </button>
-                    <button className="btn btn-secondary m-1 float-right" onClick="">Format <span><i className="fa fa-align-justify" aria-hidden="true"></i></span> </button>
+                    <button className="btn btn-secondary m-1 float-right" onClick="" disabled>Save <span><i className="fa fa-save" aria-hidden="true"></i></span> </button>
+                    <button className="btn btn-secondary m-1 float-right" onClick="" disabled>Format <span><i className="fa fa-align-justify" aria-hidden="true"></i></span> </button>
                     
                 </div>
             </div>
