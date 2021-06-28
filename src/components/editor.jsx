@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../App.css';
+// import '../App.css';
 import LangSelection from './languageSelection';
 import Theme from './theme';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
