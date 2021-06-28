@@ -31,7 +31,10 @@ class Editor extends Component {
         code: '',
         result:'',
         trace:'',
-        isOpen: false
+        isOpen: false,
+        cardSize1: "col-md-12 card",
+        cardSize2: "col-md-12 card",
+
      }
      handleLanguageChange = (e) => {
          console.log("Language Change happened",e.target.value)
@@ -49,7 +52,12 @@ class Editor extends Component {
          console.log("Code was submitted",this.state.code)
          let result = "Executing ... 🐑 🤘"
          this.setState({result})
-
+         console.log(this.state.code)
+         if(this.state.code === ""){
+             return this.setState({
+                 result: "Please add code to the terminal and then click on run."
+             })
+         }
          const url = " http://127.0.0.1:8000/compile-python/"
          const code = this.state.code
          setTimeout(()=> {
@@ -76,6 +84,12 @@ class Editor extends Component {
       isOpen: !this.state.isOpen
     });
   }
+//   expandCard = () => {
+//     this.setState({
+//         isExpand: !this.state.isExpand
+//     }) 
+//     this.state.isExpand === true?this.setState({cardSize1:"col-md-12 card",cardSize2:"col-md-12 card" }):this.setState({cardSize1:"col-md-6 card",cardSize2:"col-md-5 card" })
+//   }
  customStyles = {
      overlay: {
       position: 'fixed',
@@ -110,7 +124,7 @@ class Editor extends Component {
                             style={this.customStyles}
                             closeTimeoutMS={500}
                         >
-                        <div className="container ">
+                        <div className="container">
                             <div className="container">
                                 {console.log(this.theme_lists)}
                                 <button className="btn btn-secondary float-right" onClick={this.toggleModal}><i className="fa fa-close"></i></button>
@@ -130,14 +144,14 @@ class Editor extends Component {
             <div className="container">
                 <br></br>
             <div className="row m-2"></div>
-            <div className="card shadow-lg p-3 mb-5 border-0 bg-white">   
+            <div className="card shadow-lg border-0 m-2 p-3 bg-white" style={{background: '#DCDCDC'}}>    
                 <div class="card-header border-0">
                     <button type="button"  onClick={this.toggleModal} style={{transition: "transform .2s" }} className="btn btn-default border-0 float-right" aria-label="Left Align">
                         <span><i className="fa fa-cog" style={{fontSize: "20px"}}></i></span>
                     </button>
-                    <button type="button"  onClick={this.toggleModal} style={{transition: "transform .2s" }} className="btn btn-default border-0 float-right" aria-label="Left Align">
+                    {/* <button type="button"  onClick={this.expandCard} style={{transition: "transform .2s" }} className="btn btn-default border-0 float-right" aria-label="Left Align">
                         <span><i className="fa fa-expand" style={{fontSize: "20px"}}></i></span>
-                    </button>
+                    </button> */}
                     <button type="button"  onClick={this.toggleModal} style={{transition: "transform .2s" }} className="btn btn-default border-0 float-right">
                         <span><i className="fa fa-download" style={{fontSize: "20px"}}></i></span>
                     </button>
@@ -145,9 +159,10 @@ class Editor extends Component {
                         <span><i className="fa fa-info" style={{fontSize: "20px"}}></i></span>
                     </button>
                 </div>
-                <div className="row m-2">
-                    <div className="col-md-6 card">
+                <div className="row m-2 p2">
+                    <div className={this.state.cardSize1}>
                         <AceEditor
+                            className="mt-3"
                             mode={this.state.language}
                             onChange={(newValue) => this.updateCode(newValue)}
                             value={this.state.code}
@@ -156,7 +171,8 @@ class Editor extends Component {
                             setOptions={{
                                 showLineNumbers: true,
                                 tabSize: 4,
-                                showGutter: true
+                                showGutter: false,
+                                showPrintMargin:true
                                 }}
                             width="100%"
                             fontSize={14}
@@ -165,11 +181,13 @@ class Editor extends Component {
                             editorProps={{ $blockScrolling: true }}
                             wrapEnabled= {true}
                             highlightActiveLine={true}
-                            autoScrollEditorIntoView ={true}  />       
+                            autoScrollEditorIntoView ={true}
+                            enableBasicAutocompletion={true}
+                            enableLiveAutocompletion={true}
+                            enableSnippets={true}  />       
 
                     </div> 
-                   
-                    <div className="card col-md-5" style={{background: '#DCDCDC', fontFamily:"Courier", fontSize:12}}>
+                    <div className={this.state.cardSize2} style={{background: '#DCDCDC', fontFamily:"Courier", fontSize:12}}>
                             <Tabs  style={{
                                 color: "#3f3f5a",
                                 background: '#DCDCDC',
