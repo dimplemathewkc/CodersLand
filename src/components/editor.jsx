@@ -171,12 +171,11 @@ class Editor extends Component {
                             setOptions={{
                                 showLineNumbers: true,
                                 tabSize: 4,
-                                showGutter: false,
-                                showPrintMargin:true
+                                showGutter: true
                                 }}
                             width="100%"
                             fontSize={14}
-                            showPrintMargin={true}
+                            showPrintMargin={false}
                             focus={true}
                             editorProps={{ $blockScrolling: true }}
                             wrapEnabled= {true}
