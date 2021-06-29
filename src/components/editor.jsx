@@ -58,7 +58,7 @@ class Editor extends Component {
                  result: "Please add code to the terminal and then click on run."
              })
          }
-         const url = "http://127.0.0.1:8000/compile-python/"
+         const url = "https://coders-land-backend.herokuapp.com/compile-python/"
          const code = this.state.code
          setTimeout(()=> {
             axios.post(url,{code}).then(res => {
