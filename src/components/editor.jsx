@@ -7,7 +7,9 @@ import 'react-tabs/style/react-tabs.css';
 import Modal from "react-modal";
 import axios from 'axios'
 import AceEditor from "react-ace";
+import Settings from './editorSettings';
 import 'ace-builds/src-noconflict/ext-beautify'
+
 
 Modal.setAppElement("#root");
 
@@ -47,10 +49,9 @@ class Editor extends Component {
         this.setState({theme})
      }
      
-     
      handleCode = () => {
          console.log("Code was submitted",this.state.code)
-         let result = "Executing ... 🐑 🤘"
+         let result = "Executing... 🐑 🤘"
          this.setState({result})
          console.log(this.state.code)
          if(this.state.code === ""){
@@ -58,11 +59,13 @@ class Editor extends Component {
                  result: "Please add code to the terminal and then click on run."
              })
          }
-         const url = "https://coders-land-backend.herokuapp.com/compile-python/"
-         const code = this.state.code
+        const url = "https://coders-land-backend.herokuapp.com/compile-python/"
+        // const url = "http://127.0.0.1:8000/compile-python/" 
+        const code = this.state.code
          setTimeout(()=> {
             axios.post(url,{code}).then(res => {
                 console.log(res)
+                console.log(res.data["status"])
                 const result = res.data["resrun"]
                 const trace = res.data["trace"]
                 const status = res.data["status"]
@@ -74,7 +77,7 @@ class Editor extends Component {
             }).catch(function (error) {
         // handle error
         console.log(error);
-      })},3000)
+      })},2000)
      }
     
      updateCode(value) {
@@ -87,12 +90,7 @@ class Editor extends Component {
       isOpen: !this.state.isOpen
     });
   }
-//   expandCard = () => {
-//     this.setState({
-//         isExpand: !this.state.isExpand
-//     }) 
-//     this.state.isExpand === true?this.setState({cardSize1:"col-md-12 card",cardSize2:"col-md-12 card" }):this.setState({cardSize1:"col-md-6 card",cardSize2:"col-md-5 card" })
-//   }
+
  customStyles = {
      overlay: {
       position: 'fixed',
@@ -111,7 +109,6 @@ class Editor extends Component {
     transform: 'translate(-60%, -50%)',
     WebkitOverflowScrolling: 'touch',
     borderRadius: '6px',
-
   },
 };
 
@@ -149,20 +146,7 @@ class Editor extends Component {
                 <br></br>
             <div className="row m-2"></div>
             <div className="card shadow-lg border-0 m-2 p-3 bg-white" style={{background: '#DCDCDC'}}>    
-                <div class="card-header border-0">
-                    <button type="button"  onClick={this.toggleModal} style={{transition: "transform .2s" }} className="btn btn-default border-0 float-right" aria-label="Left Align">
-                        <span><i className="fa fa-cog" style={{fontSize: "20px"}}></i></span>
-                    </button>
-                    {/* <button type="button"  onClick={this.expandCard} style={{transition: "transform .2s" }} className="btn btn-default border-0 float-right" aria-label="Left Align">
-                        <span><i className="fa fa-expand" style={{fontSize: "20px"}}></i></span>
-                    </button> */}
-                    <button type="button"  onClick="" style={{transition: "transform .2s" }} className="btn btn-default border-0 float-right">
-                        <span><i className="fa fa-download" style={{fontSize: "20px"}}></i></span>
-                    </button>
-                    {/* <button type="button"  onClick={this.toggleModal} style={{transition: "transform .2s" }} className="btn btn-default border-0 float-right" aria-label="Left Align">
-                        <span><i className="fa fa-info" style={{fontSize: "20px"}}></i></span>
-                    </button> */}
-                </div>
+                <Settings toggleModal={this.toggleModal} code={this.state.code}/>
                 <div className="row m-2 p2">
                     <div className={this.state.cardSize1}>
                         <AceEditor

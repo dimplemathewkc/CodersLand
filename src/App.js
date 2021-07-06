@@ -18,15 +18,20 @@ import 'brace/theme/solarized_dark'
 import 'brace/theme/terminal'
 import 'brace/theme/monokai'
 import 'brace/theme/tomorrow'
-
+import { Route, Switch } from 'react-router';
+import Login from './components/Login'
 import React from 'react';
 function App() {
   return (
     <React.Fragment style={{background:'#B4A5A5'}}>
       <Navbar/>
-      <main className="container" style={{fontFamily: ''}}>
-        <Editor/>
-      </main>
+      <div className='content'>
+        <Switch>
+          <Route path='/login' component={Login}/>
+          <Route path='/' component={Editor}/>
+        </Switch>
+      </div>
+      
     </React.Fragment>
   );
 }
