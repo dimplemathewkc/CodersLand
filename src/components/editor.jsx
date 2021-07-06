@@ -77,7 +77,7 @@ class Editor extends Component {
             }).catch(function (error) {
         // handle error
         console.log(error);
-      })},2000)
+      })},500)
      }
     
      updateCode(value) {
